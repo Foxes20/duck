@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>DUCK HUNT</title>
+	<link rel="stylesheet" href="assets/styles/reset.css">
+	<link rel="stylesheet" href="assets/styles/style.css">
+
+	<style>
+		/*.duck {
+			left: 100px;
+		}*/
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="dog gs"></div>
+
+		<div class="duck gs"></div>
+
+		<div class="foot"></div>
+	</div>
+
+	<script>
+
+		let wrapper = document.querySelector(".wrapper");
+		const dog = document.querySelector(".dog");
+		const duck = document.querySelector(".duck");
+
+		function game () {
+			dog.classList.add("dog_walk");
+			
+			duck.addEventListener("click", () => {
+				alert("Вы подстрелили утку!");
+				location.reload();
+			});	
+
+			function step2 (time) {				
+				if(time == 0) {
+					dog.classList.add("dog_jump");}
+					setTimeout(step2, 1000, time-1 );
+
+				if(time == -2) {
+					dog.style.display = "none";
+					dog.classList.remove("dog_walk");
+					dog.classList.remove("dog_jump");
+					duck.classList.add("duck_fly");	
+					duck.classList.add("duck_fly_top_right");
+					duck.style.transform = "translate(650px,-350px)"
+					duck.style.transition = "transform 3s linear 0s";	
+				}
+				if(time == -5){	
+					duck.classList.remove("duck_fly_top_right");
+					duck.classList.add("duck_fly_left");
+					duck.style.transform = "translate(50px,-100px)"
+					duck.style.transition = "transform 3s linear 0s";
+					}	
+				if(time == -8){
+					duck.classList.remove("duck_fly_left");
+					duck.classList.add("duck_fly_right");
+					duck.style.transform = "translate(1400px,-190px)"
+					duck.style.transition = "transform 4s linear 0s";
+				}
+				if(time == -12) {
+					duck.classList.remove("duck_fly_right");
+					duck.classList.add("duck_fly_top_left");
+					duck.style.transform = "translate(800px,-400px)"
+					duck.style.transition = "transform 3s linear 0s";
+				}
+				if(time == -15) {
+					duck.classList.remove("duck_fly_top_left");
+					duck.classList.add("duck_fly_left");
+					duck.style.transform = "translate(0px,0px)"
+					duck.style.transition = "transform 3s linear 0s";
+				}
+				if(time == -17) {
+					console.log(time)
+					time = -1;
+					setTimeout(step2, 1000, time-1 );
+					console.log(time)
+				}				
+			};
+
+		step2(6);
+		};
+
+		window.onload = game;
+
+	</script>
+</body>
+</html>
